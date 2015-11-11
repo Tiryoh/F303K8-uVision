@@ -12,14 +12,14 @@
       <ToolsetName>ARM-ADS</ToolsetName>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32F303RC</Device>
+          <Device>STM32F303K8</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <Cpu>IRAM(0x20000000-0x20009FFF) IRAM2(0x10000000-0x10001FFF) IROM(0x8000000-0x803FFFF) CLOCK(8000000) CPUTYPE("Cortex-M4") FPU2</Cpu>
+          <Cpu>IROM(0x08000000,0x00010000) IRAM(0x20000000,0x00003000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
-          <StartupFile>"Startup\ST\STM32F30x\startup_stm32f30x.s" ("STM32F30x Startup Code")</StartupFile>
-          <FlashDriverDll>UL2CM3(-O207 -S0 -C0 -FO7 -FD20000000 -FC800 -FN1 -FF0STM32F3xx_256 -FS08000000 -FL040000)</FlashDriverDll>
-          <DeviceId>6570</DeviceId>
-          <RegisterFile>stm32f30x.h</RegisterFile>
+          <StartupFile></StartupFile>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F3xx_256 -FS08000000 -FL010000 -FP0($$Device:STM32F303K8$Flash\STM32F3xx_256.FLM))</FlashDriverDll>
+          <DeviceId>0</DeviceId>
+          <RegisterFile>$$Device:STM32F303K8$Device\Include\stm32f3xx.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -29,14 +29,14 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>SFD\ST\STM32F30x\STM32F30x.sfr</SFDFile>
+          <SFDFile>$$Device:STM32F303K8$SVD\STM32F303x.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
           <IncludePath></IncludePath>
           <LibPath></LibPath>
-          <RegisterFilePath>ST\STM32F30x\</RegisterFilePath>
-          <DBRegisterFilePath>ST\STM32F30x\</DBRegisterFilePath>
+          <RegisterFilePath></RegisterFilePath>
+          <DBRegisterFilePath></DBRegisterFilePath>
           <TargetStatus>
             <Error>0</Error>
             <ExitCodeStop>0</ExitCodeStop>
@@ -74,7 +74,7 @@
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
           </BeforeMake>
           <AfterMake>
-            <RunUserProg1>1</RunUserProg1>
+            <RunUserProg1>0</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
             <UserProg1Name>fromelf --bin -o build\NucleoF303K8_blinky_NUCLEO_F302R8.bin build\NucleoF303K8_blinky.axf</UserProg1Name>
             <UserProg2Name></UserProg2Name>
@@ -102,11 +102,11 @@
         </CommonProperty>
         <DllOption>
           <SimDllName>SARMCM3.DLL</SimDllName>
-          <SimDllArguments>-MPU -REMAP</SimDllArguments>
+          <SimDllArguments> -REMAP -MPU</SimDllArguments>
           <SimDlgDll>DCM.DLL</SimDlgDll>
           <SimDlgDllArguments>-pCM4</SimDlgDllArguments>
           <TargetDllName>SARMCM3.DLL</TargetDllName>
-          <TargetDllArguments>-MPU</TargetDllArguments>
+          <TargetDllArguments> -MPU</TargetDllArguments>
           <TargetDlgDll>TCM.DLL</TargetDlgDll>
           <TargetDlgDllArguments>-pCM4</TargetDlgDllArguments>
         </DllOption>
@@ -128,7 +128,6 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
-            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>1</UseTarget>
@@ -140,11 +139,9 @@
             <RestoreFunctions>0</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>0</RestoreTracepoints>
-            <RestoreSysVw>1</RestoreSysVw>
-            <UsePdscDebugDescription>1</UsePdscDebugDescription>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
-          <TargetSelection>1</TargetSelection>
+          <TargetSelection>11</TargetSelection>
           <SimDlls>
             <CpuDll></CpuDll>
             <CpuDllArguments></CpuDllArguments>
@@ -158,7 +155,7 @@
             <PeripheralDll></PeripheralDll>
             <PeripheralDllArguments></PeripheralDllArguments>
             <InitializationFile></InitializationFile>
-            <Driver>BIN\UL2CM3.DLL</Driver>
+            <Driver>STLink\ST-LINKIII-KEIL_SWO.dll</Driver>
           </TargetDlls>
         </DebugOption>
         <Utilities>
@@ -171,8 +168,8 @@
             <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
-          <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash2>STLink\ST-LINKIII-KEIL_SWO.dll</Flash2>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -218,7 +215,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
-            <hadIRAM2>1</hadIRAM2>
+            <hadIRAM2>0</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
             <useUlib>1</useUlib>
@@ -277,12 +274,12 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0xa000</Size>
+                <Size>0x3000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x40000</Size>
+                <Size>0x10000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -307,7 +304,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x40000</Size>
+                <Size>0x10000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -332,12 +329,12 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0xa000</Size>
+                <Size>0x3000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
-                <StartAddress>0x10000000</StartAddress>
-                <Size>0x2000</Size>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
               </OCR_RVCT10>
             </OnChipMemories>
             <RvctStartVector></RvctStartVector>
@@ -356,13 +353,11 @@
             <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
-            <useXO>0</useXO>
             <VariousControls>
               <MiscControls>--gnu --no_rtti </MiscControls>
-              <Define> TARGET_M4,  TARGET_FF_ARDUINO,  __CORTEX_M4,  __FPU_PRESENT=1,  TARGET_CORTEX_M,  TOOLCHAIN_ARM_MICRO,  TARGET_STM32F303K8,  MBED_BUILD_TIMESTAMP=1446624630.66,  TARGET_NUCLEO_F303K8,  __MBED__=1,  TARGET_STM,  TARGET_STM32F3,  TOOLCHAIN_ARM,  ARM_MATH_CM4,  __ASSERT_MSG, </Define>
+              <Define> TARGET_M4,  TARGET_FF_ARDUINO,  __CORTEX_M4,  MBED_BUILD_TIMESTAMP=1447249464.05,  __FPU_PRESENT=1,  TARGET_CORTEX_M,  TOOLCHAIN_ARM_MICRO,  TARGET_STM32F303K8,  TARGET_NUCLEO_F303K8,  __MBED__=1,  TARGET_STM,  TARGET_STM32F3,  TOOLCHAIN_ARM,  ARM_MATH_CM4,  __ASSERT_MSG, </Define>
               <Undefine></Undefine>
-              <IncludePath>  .;  mbed;  mbed/api;  mbed/common;  mbed/hal;  mbed/targets;  mbed/targets/cmsis;  mbed/targets/cmsis/TARGET_STM;  mbed/targets/cmsis/TARGET_STM/TARGET_STM32F3;  mbed/targets/cmsis/TARGET_STM/TARGET_STM32F3/TARGET_NUCLEO_F303K8;  mbed/targets/cmsis/TARGET_STM/TARGET_STM32F3/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO;  mbed/targets/hal;  mbed/targets/hal/TARGET_STM;  mbed/targets/hal/TARGET_STM/TARGET_STM32F3;  mbed/targets/hal/TARGET_STM/TARGET_STM32F3/TARGET_NUCLEO_F303K8</IncludePath>
+              <IncludePath>  .;  mbed;  mbed/TARGET_NUCLEO_F303K8;  mbed/TARGET_NUCLEO_F303K8/TARGET_STM;  mbed/TARGET_NUCLEO_F303K8/TARGET_STM/TARGET_STM32F3;  mbed/TARGET_NUCLEO_F303K8/TARGET_STM/TARGET_STM32F3/TARGET_NUCLEO_F303K8;  mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO;  </IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -374,7 +369,6 @@
             <SwStkChk>0</SwStkChk>
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
-            <useXO>0</useXO>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define></Define>
@@ -391,71 +385,126 @@
             <useFile>0</useFile>
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
-            <pXoBase></pXoBase>
-            <ScatterFile>mbed/targets/cmsis/TARGET_STM/TARGET_STM32F3/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f303x8.sct</ScatterFile>
+            <ScatterFile>mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f303x8.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc>
             
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/board.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/cmsis_nvic.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/hal_tick.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/mbed.ar
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/mbed_overrides.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/retarget.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/startup_stm32f303x8.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_adc.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_adc_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_can.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_cec.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_comp.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_cortex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_crc.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_crc_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_dac.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_dac_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_dma.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_flash.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_flash_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_gpio.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_hrtim.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_i2c.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_i2c_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_i2s.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_i2s_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_irda.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_iwdg.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_nand.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_nor.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_opamp.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_opamp_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_pccard.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_pcd.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_pcd_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_pwr.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_pwr_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_rcc.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_rcc_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_rtc.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_rtc_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_sdadc.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_smartcard.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_smartcard_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_smbus.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_spi.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_sram.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_tim.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_tim_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_tsc.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_uart.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_uart_ex.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_usart.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_wwdg.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_ll_fmc.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/sys.o
-            mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/system_stm32f3xx.o
-
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_smartcard.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/board.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/cmsis_nvic.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/hal_tick.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/mbed_overrides.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/retarget.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/startup_stm32f303x8.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_adc.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_adc_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_can.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_cec.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_comp.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_cortex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_crc.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_crc_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_dac.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_dac_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_dma.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_flash.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_flash_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_gpio.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_hrtim.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_i2c.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_i2c_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_i2s.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_i2s_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_irda.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_iwdg.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_nand.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_nor.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_opamp.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_opamp_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_pccard.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_pcd.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_pcd_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_pwr.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_pwr_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_rcc.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_rcc_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_rtc.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_rtc_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_sdadc.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_smartcard_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_smbus.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_spi.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_sram.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_tim.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_tim_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_tsc.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_uart.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_uart_ex.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_usart.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_hal_wwdg.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/stm32f3xx_ll_fmc.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/sys.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/system_stm32f3xx.o
+            
+              mbed/TARGET_NUCLEO_F303K8/TOOLCHAIN_ARM_MICRO/mbed.ar
             
             </Misc>
             <LinkerInputFile></LinkerInputFile>
@@ -464,9 +513,11 @@
         </TargetArmAds>
       </TargetOption>
       <Groups>
+        
         <Group>
           <GroupName>src</GroupName>
           <Files>
+            
             <File>
               <FileName>main.cpp</FileName>
               <FileType>8</FileType>
@@ -486,37 +537,14 @@
                   <StopOnExitCode>3</StopOnExitCode>
                   <CustomArgument></CustomArgument>
                   <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
                 </CommonProperty>
-                <FileArmAds>
-                  <Cads>
-                    <interw>2</interw>
-                    <Optim>0</Optim>
-                    <oTime>2</oTime>
-                    <SplitLS>2</SplitLS>
-                    <OneElfS>2</OneElfS>
-                    <Strict>2</Strict>
-                    <EnumInt>2</EnumInt>
-                    <PlainCh>2</PlainCh>
-                    <Ropi>2</Ropi>
-                    <Rwpi>2</Rwpi>
-                    <wLevel>0</wLevel>
-                    <uThumb>2</uThumb>
-                    <uSurpInc>2</uSurpInc>
-                    <uC99>2</uC99>
-                    <useXO>2</useXO>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
+                <FileArmAds/>
               </FileOption>
             </File>
+            
           </Files>
         </Group>
+        
       </Groups>
     </Target>
   </Targets>
